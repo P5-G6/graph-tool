@@ -14,7 +14,7 @@ export { Types };
 
 const INITIAL_STATE = {
   values: {},
-  graphData: {},
+  graphData: {nodes: [], edges: []},
   loading: false,
 };
 
@@ -28,9 +28,9 @@ export const reducer = createReducer(INITIAL_STATE, {
     ...state,
     loading: true,
   }),
-  [Types.SEND_VALUES_SUCCESS]: (state, { graphData = {} }) => ({
+  [Types.SEND_VALUES_SUCCESS]: (state, { graphData = INITIAL_STATE.graphData }) => ({
     ...state,
-    loading: true,
+    loading: false,
     graphData,
   }),
   [Types.SEND_VALUES_ERROR]: (state) => ({

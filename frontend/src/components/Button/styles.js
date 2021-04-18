@@ -16,4 +16,12 @@ export const Container = styled.div`
     text-align: center;
     color: ${({ labelColor }) => labelColor};
   }
+
+  cursor: pointer;
+
+  transition: opacity .2s;
+
+  &:hover {
+    opacity: 0.5;
+  }
 `;
