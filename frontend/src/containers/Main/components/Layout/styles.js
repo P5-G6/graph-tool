@@ -11,7 +11,6 @@ export const Container = styled.div`
   .side-bar {
     display: flex;
     max-height: 100%;
-    width: 200px;
   }
   .main-content {
       display: flex;

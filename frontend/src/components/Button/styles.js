@@ -6,8 +6,11 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${({ bgColor }) => bgColor};
+  min-width: 20px; 
+  max-height: 40px;
 
-  border-radius: 15px;
+  border-radius: 10px;
+  padding: 5px 10px;
 
   .btn-label {
     display: flex;

@@ -25,6 +25,7 @@ function Network({ nodes = [], edges = [], loading = false }) {
     },
     edges: {
       color: '#000000',
+      
     },
     height: '100%',
     width: '100%',
@@ -32,6 +33,7 @@ function Network({ nodes = [], edges = [], loading = false }) {
 
   const events = {
     select: function (event) {
+      console.log('Edge', event)
       // var { nodes, edges } = event;
     },
   };
