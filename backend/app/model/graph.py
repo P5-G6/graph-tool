@@ -1,5 +1,5 @@
 """Node definition class."""
-from model.vertex import Vertex
+from app.model.vertex import Vertex
 
 
 class Graph:
