@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.button`
   display: flex;
   flex-directon: row;
   align-items: center;
@@ -8,6 +8,7 @@ export const Container = styled.div`
   background-color: ${({ bgColor }) => bgColor};
   min-width: 20px; 
   max-height: 40px;
+  border: none;
 
   border-radius: 10px;
   padding: 5px 10px;

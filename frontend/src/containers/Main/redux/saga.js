@@ -65,9 +65,22 @@ function* pushValueSaga() {
   }
 }
 
+function* selectNodeSaga({ selectedNode }) {
+  try {
+    if (selectedNode !== null) {
+      return yield put(Creators.selectNodeSuccess({})); // TODO ADD MOCK
+    }
+
+    return yield put(Creators.selectNodeError());
+  } catch (error) {
+    return yield put(Creators.selectNodeError());
+  }
+}
+
 export default function* MainSaga() {
   return yield all([
     takeLatest(Types.SYNC_GRAPH_DATA, syncGraphDataSaga),
     takeLatest(Types.PUSH_VALUE, pushValueSaga),
+    takeLatest(Types.SELECT_NODE, selectNodeSaga),
   ]);
 }

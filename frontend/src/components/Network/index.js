@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import Graph from 'react-vis-network-graph';
 import { Container } from './styles';
 
@@ -18,24 +18,27 @@ import { Container } from './styles';
 //   ],
 // };
 
-function Network({ nodes = [], edges = [], loading = false }) {
+function Network({ nodes = [], edges = [], loading = false, onPress = null }) {
+  const handlePress = useCallback(
+    (event) => {
+      if (onPress) onPress(event);
+    },
+    [onPress]
+  );
+
   const options = {
     layout: {
       hierarchical: false,
     },
     edges: {
       color: '#000000',
-      
     },
     height: '100%',
     width: '100%',
   };
 
   const events = {
-    select: function (event) {
-      console.log('Edge', event)
-      // var { nodes, edges } = event;
-    },
+    select: handlePress,
   };
 
   useEffect(() => {}, [nodes, edges]);

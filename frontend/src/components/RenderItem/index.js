@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Container } from './styles';
 
+import { FiArrowRightCircle } from 'react-icons/fi';
+
 export default function RenderItem({
   index,
   from = '',
@@ -12,13 +14,17 @@ export default function RenderItem({
   return (
     <Container>
       <div className='section primary-section'>
-        <strong>{index}</strong>
-        <strong>{weight}</strong>
+        <div className='value'>{index}</div>
+        <div className='value right' style={{ justifyContent: 'flex-end' }}>
+          {weight}
+        </div>
       </div>
       <div className='section'>
-        <strong>{from}</strong>
-        <strong>{`dir:${directioned}`}</strong>
-        <strong>{to}</strong>
+        <div className='value'>{from}</div>
+        {directioned && <FiArrowRightCircle className='icon' />}
+        <div className='value right' style={{ justifyContent: 'flex-end' }}>
+          {to}
+        </div>
       </div>
     </Container>
   );

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Creators from '../../redux/reducer';
+import Creators, { get } from '../../redux/reducer';
 
 import { Container } from './styles';
 
@@ -13,6 +13,7 @@ import RenderItem from '../../../../components/RenderItem';
 
 export default function Sidebar() {
   const dispatch = useDispatch();
+  const loading = useSelector(get.loading);
 
   const handlePushValue = useCallback(() => {
     dispatch(Creators.pushValue());
@@ -26,7 +27,7 @@ export default function Sidebar() {
     <Container>
       <div className='input-section'>
         <div className='text-input'>
-          <ConnectedTextInput placeholder='EDGE...' />
+          <ConnectedTextInput placeholder='EDGE...' onSubmit={handlePushValue} />
         </div>
         <div className='add-button'>
           <Button
@@ -34,6 +35,7 @@ export default function Sidebar() {
             onPress={handlePushValue}
             backgroundColor='#000000'
             labelColor='#fff'
+            loading={loading}
           />
         </div>
       </div>

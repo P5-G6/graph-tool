@@ -13,6 +13,10 @@ const { Types, Creators } = createActions({
   syncGraphData: null,
   syncGraphDataSuccess: ['graphData'],
   syncGraphDataError: null,
+
+  selectNode: ['selectedNode'],
+  selectNodeSuccess: ['selectedNodeData'],
+  selectNodeError: null,
 });
 
 export default Creators;
@@ -24,6 +28,10 @@ const INITIAL_STATE = {
   loading: false,
   textInput: '',
   validating: false,
+
+  selectedNode: null,
+  selectedNodeData: null,
+  loadingNodeData: false,
 };
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -36,14 +44,15 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.PUSH_VALUE]: (state) => ({ ...state, validating: true }),
   [Types.PUSH_VALUE_SUCCESS]: ({ values, ...state }, { value }) => ({
     ...state,
-    values: [
-      ...values,
-      value
-    ],
+    values: [...values, value],
     validating: false,
     textInput: '',
   }),
-  [Types.PUSH_VALUE_ERROR]: (state) => ({ ...state, validating: false, textInput: '' }),
+  [Types.PUSH_VALUE_ERROR]: (state) => ({
+    ...state,
+    validating: false,
+    textInput: '',
+  }),
 
   [Types.SYNC_GRAPH_DATA]: (state) => ({
     ...state,
@@ -66,6 +75,23 @@ export const reducer = createReducer(INITIAL_STATE, {
     ...state,
     textInput,
   }),
+
+  [Types.SELECT_NODE]: (state, { selectedNode }) => ({
+    ...state,
+    selectedNode,
+    loadingNodeData: true,
+  }),
+
+  [Types.SELECT_NODE_SUCCESS]: (state, { selectedNodeData }) => ({
+    ...state,
+    selectedNodeData,
+    loadingNodeData: false,
+  }),
+  [Types.SELECT_NODE_ERROR]: (state) => ({
+    ...state,
+    loadingNodeData: false,
+    selectedNodeData: null,
+  }),
 });
 
 const root = (state) => state['MainReducer'];
@@ -76,4 +102,10 @@ export const get = {
   loading: (state) => root(state).loading,
   textInput: (state) => root(state).textInput,
   validating: (state) => root(state).validating,
+};
+
+export const getNode = {
+  selectedNode: (state) => root(state).selectedNode,
+  selectedNodeData: (state) => root(state).selectedNodeData,
+
 };

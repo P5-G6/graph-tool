@@ -13,11 +13,23 @@ export const Container = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 5px;
+    padding: 5px 10px;
   }
 
   .primary-section {
     border-radius: 10px;
     background-color: #fff;
+  }
+
+  .value {
+    display: flex;
+    flex: 1;
+    font-size: 15;
+    font-weight: bold;
+  }
+
+  .icon {
+    font-size: 20px;
+    justify-content: center;
   }
 `;
