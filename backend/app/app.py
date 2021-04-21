@@ -3,12 +3,16 @@ import app.service.services as services
 from app.model.graph import Graph
 from flask import Flask
 from flask import request
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 graph = Graph()
+CORS(app, support_credentials=True)
 
 
 @app.route('/adjacency-list', methods=['GET'])
+@cross_origin(supports_credentials=True)
+
 def get_adjacency_list():
     """Hello flask."""
     if graph.vertices:
@@ -23,7 +27,7 @@ def get_adjacency_list():
     response = {"statusCode": 200,
                 "headers": {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'},
+                    'Access-Control-Allow-Origin': 'http://localhost:3000'},
                 "body": adjacency_list
                 }
     return response
@@ -51,6 +55,7 @@ def get_graph_order():
 
 
 @app.route('/graph-size', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def get_graph_size():
     """Hello flask."""
     if graph.vertices:
@@ -72,6 +77,7 @@ def get_graph_size():
 
 
 @app.route('/check-if-are-adjacents', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def get_check_if_are_adjacents():
     """Hello flask."""
     vertex_1 = request.args.get('vertex_1')
@@ -98,6 +104,7 @@ def get_check_if_are_adjacents():
 
 
 @app.route('/vertex-degree', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def get_vertex_degree():
     """Hello flask."""
     vertex = request.args.get('vertex')
@@ -145,10 +152,17 @@ def get_vertex_adjacent_list():
 
 
 @app.route('/graph/add-vertex', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def post_add_vertex():
     """Hello flask."""
     request_json = request.get_json()
     vertex = request_json["vertex_label"]
+    if vertex in graph.vertices:
+        return {"statusCode": 404,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'}
+                }
     graph.add_vertex(str(vertex))
     added_vertex = {"added_vertex_label": str(vertex)}
     response = {"statusCode": 200,
@@ -161,6 +175,7 @@ def post_add_vertex():
 
 
 @app.route('/graph/add-edge', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def post_add_edge():
     """Hello flask."""
     request_json = request.get_json()

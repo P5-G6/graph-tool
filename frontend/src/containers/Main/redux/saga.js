@@ -2,7 +2,7 @@ import { takeLatest, all, put, call, select } from 'redux-saga/effects';
 import Creators, { Types, get } from './reducer';
 import adaptNetwork from '../../../utils/adaptNetwork';
 
-// import api from '../../../services/api';
+import api from '../../../services/api';
 
 import mock from '../../../mocks/nodes.json';
 import bananaSplit from '../../../utils/bananaSplit';
@@ -26,10 +26,13 @@ const mockedAdd = (values) =>
 function* syncGraphDataSaga() {
   try {
     // TODO: ASYNC VALUES SEND
-    const { data = {}, status } = yield call(mockSyncGraph);
+    const { data = {}, status, body } = yield call(api.get, '/adjacency-list');
+
+    console.log('Data', {data, body, status})
 
     if (status === 200) {
-      const graphData = adaptNetwork(data);
+      const {body: {adjacency_list}} = data;
+      const graphData = adaptNetwork(adjacency_list);
 
       return yield put(Creators.syncGraphDataSuccess(graphData));
     }
@@ -48,7 +51,16 @@ function* pushValueSaga() {
 
     if (!valid) return yield put(Creators.pushValueError());
 
-    const { status } = yield call(mockedAdd);
+    console.log('send value', value);
+
+    const [{ status: statusA }, { status: statusB }] = yield all([
+      call(api.post, 'graph/add-vertex', { vertex_label: value[0] }),
+      call(api.post, 'graph/add-vertex', { vertex_label: value[1] }),
+    ]);
+
+    const { status } = yield call(api.post, 'graph/add-edge', { edge: value });
+
+    yield put(Creators.syncGraphData());
 
     if (status === 200) {
       const [from, to, weight, directioned] = value;
