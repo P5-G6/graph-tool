@@ -1,17 +1,22 @@
-import React from "react";
+import React from 'react';
 
-import Sidebar from "../Sidebar";
+import Sidebar from '../Sidebar';
 
-import { Container } from "./styles";
+import { Container } from './styles';
+
+import ConnectedModal from './connectedModal';
 
 function Layout({ children }) {
   return (
-    <Container>
-      <div className="side-bar">
-        <Sidebar />
-      </div>
-      <div className="main-content">{children}</div>
-    </Container>
+    <>
+      <ConnectedModal>JUJUTSU KAISER</ConnectedModal>
+      <Container>
+        <div className='side-bar'>
+          <Sidebar />
+        </div>
+        <div className='main-content'>{children}</div>
+      </Container>
+    </>
   );
 }
 

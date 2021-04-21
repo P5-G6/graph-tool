@@ -1,0 +1,10 @@
+{
+  "vertex_adjacent_list": {
+    "in": [],
+    "out": [["4", 3, true]],
+    "edges": [
+      ["2", 4, false],
+      ["3", 4, false]
+    ]
+  }
+}
