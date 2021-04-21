@@ -1,0 +1,7 @@
+# Python
+.env
+.py__cache
+__pycache__
+
+#OSX
+.DS_Store
