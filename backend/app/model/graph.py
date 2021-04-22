@@ -44,3 +44,21 @@ class Graph:
     def clear_graph(self):
         """Clear all vertices."""
         self.vertices = {}
+
+    def delete_vertex(self, vertex_label):
+        """Delete an vertex."""
+        del self.vertices[vertex_label]
+        for vertex in self.vertices:
+            for edge in self.vertices[vertex].adjacent_vertices:
+                if edge[0] == vertex_label:
+                    self.vertices[vertex].adjacent_vertices.remove(edge)
+
+    def delete_edge(self, edge):
+        """Delete an edge."""
+        if edge[-1]:
+            self.vertices[edge[0]].adjacent_vertices.remove(edge[1:])
+        else:
+            self.vertices[edge[0]].adjacent_vertices.remove(edge[1:])
+            self.vertices[edge[1]].adjacent_vertices.remove([edge[0],
+                                                            edge[2],
+                                                            edge[3]])

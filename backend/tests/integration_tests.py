@@ -37,6 +37,8 @@ class TestClass(object):
         'in': [],
         'out': [['4', 3, True]]
     }
+    mock_delete_vertex = "1"
+    mock_delete_edge = ["6", "3", 0, True]
 
     def test_post_add_vertex(self):
         """Test post_add_vertex."""
@@ -152,6 +154,38 @@ class TestClass(object):
         response_vertex_adjacent_list = \
             response['body']['vertex_adjacent_list']
         assert self.mock_vertex_adjacent_list == response_vertex_adjacent_list
+
+    def test_post_delete_vertex(self):
+        """Test get_vertex_adjacent_list."""
+        http = urllib3.PoolManager()
+        body = json.dumps({"vertex_label": self.mock_delete_vertex})
+
+        request = http.request('POST',
+                               'http://127.0.0.1:5000/graph/delete_vertex',
+                               headers={'Content-Type':
+                                        'application/json'},
+                               body=body)
+
+        response = json.loads(request.data)
+        response_deleted_vertex = \
+            response['body']['deleted_vertex']
+        assert self.mock_delete_vertex == response_deleted_vertex
+
+    def test_post_delete_edge(self):
+        """Test get_vertex_adjacent_list."""
+        http = urllib3.PoolManager()
+        body = json.dumps({"edge": self.mock_delete_edge})
+
+        request = http.request('POST',
+                               'http://127.0.0.1:5000/graph/delete_edge',
+                               headers={'Content-Type':
+                                        'application/json'},
+                               body=body)
+
+        response = json.loads(request.data)
+        response_deleted_edge = \
+            response['body']['deleted_edge']
+        assert self.mock_delete_edge == response_deleted_edge
 
 if __name__ == '__main__':
     test = TestClass()
