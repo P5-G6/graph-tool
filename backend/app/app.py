@@ -6,13 +6,13 @@ from flask import request
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 graph = Graph()
 CORS(app, support_credentials=True)
 
 
 @app.route('/adjacency-list', methods=['GET'])
 @cross_origin(supports_credentials=True)
-
 def get_adjacency_list():
     """Hello flask."""
     if graph.vertices:
@@ -34,6 +34,7 @@ def get_adjacency_list():
 
 
 @app.route('/graph-order', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def get_graph_order():
     """Hello flask."""
     if graph.vertices:
@@ -128,9 +129,9 @@ def get_vertex_degree():
 
 
 @app.route('/vertex-adjacent-list', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def get_vertex_adjacent_list():
     """Hello flask."""
-    print("oi")
     vertex = request.args.get('vertex')
     if graph.vertices:
         vertex_adjacent_list = services.vertex_adjacent_list(vertex, graph)
@@ -147,7 +148,6 @@ def get_vertex_adjacent_list():
                     'Access-Control-Allow-Origin': '*'},
                 "body": vertex_adjacent_list
                 }
-    print(vertex_adjacent_list)
     return response
 
 
@@ -158,11 +158,13 @@ def post_add_vertex():
     request_json = request.get_json()
     vertex = request_json["vertex_label"]
     if vertex in graph.vertices:
-        return {"statusCode": 404,
+        return {"statusCode": 200,
                 "headers": {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'}
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"error": "vertex already exists"}
                 }
+
     graph.add_vertex(str(vertex))
     added_vertex = {"added_vertex_label": str(vertex)}
     response = {"statusCode": 200,
@@ -190,5 +192,82 @@ def post_add_edge():
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'},
                 "body": added_edge
+                }
+    return response
+
+
+@app.route('/graph/delete_vertex', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def post_delete_vertex():
+    """Hello flask."""
+    request_json = request.get_json()
+    vertex_label = request_json["vertex_label"]
+    if vertex_label in graph.vertices:
+        graph.delete_vertex(vertex_label)
+    else:
+        return {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"error": "vertex does not exist"}
+                }
+
+    deleted_vertex = {"deleted_vertex": vertex_label}
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": deleted_vertex
+                }
+    return response
+
+
+@app.route('/graph/delete_edge', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def post_delete_edge():
+    """Hello flask."""
+    request_json = request.get_json()
+    edge = request_json["edge"]
+
+    edge_without_vertex = edge[1:]
+    deleted_flag = False
+
+    for vertex in graph.vertices:
+        adjacency_list = \
+            graph.get_vertices()[vertex].get_vertex_adjacent_list()
+        if vertex == edge[0] and edge_without_vertex in adjacency_list:
+            graph.delete_edge(edge)
+            deleted_flag = True
+            break
+
+    if not deleted_flag:
+        return {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"error": "edge does not exist"}
+                }
+
+    deleted_edge = {"deleted_edge": edge}
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": deleted_edge
+                }
+    return response
+
+
+@app.route('/graph/delete_graph', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_clear_graph():
+    """Hello flask."""
+    graph.clear_graph()
+
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"message": "graph reseted"}
                 }
     return response
