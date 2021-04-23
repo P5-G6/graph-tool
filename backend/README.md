@@ -101,7 +101,7 @@ Is a good practice in software developement to create test scripts to validade h
 
 # Development Workflow
 
-![images/backend/Screen_Shot_2021-04-22_at_23.19.18.png](images/backend/Screen_Shot_2021-04-22_at_23.19.18.png)
+![images/backend/Screen_Shot_2021-04-22_at_23.19.18.png](https://github.com/P5-G6/graph-tool/blob/docs/images/Screen_Shot_2021-04-22_at_23.19.18.png)
 
 For the development of new features, we use a specific workflow that was defined before we started the project.
 
