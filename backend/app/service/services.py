@@ -68,11 +68,12 @@ def vertex_degree(vertex_label, graph):
             out_edges += 1
 
     # Count in unidirectional edges
-    adjacency_list = adjacency_list.pop(vertex_label)
+    del adjacency_list[vertex_label]
 
     for vertex_ in adjacency_list:
-        if vertex_[0] == vertex_label and vertex_[2]:
-            in_edges += 1
+        for edge_ in adjacency_list[vertex_]:
+            if edge_[0] == vertex_label and edge_[2]:
+                in_edges += 1
 
     degree = {
         "in": in_edges,
@@ -103,11 +104,12 @@ def vertex_adjacent_list(vertex_label, graph):
             out_edges.append(edge)
 
     # Get in unidirectional edges
-    adjacency_list = adjacency_list.pop(vertex_label)
+    del adjacency_list[vertex_label]
 
     for vertex_ in adjacency_list:
-        if vertex_[0] == vertex_label and vertex_[2]:
-            in_edges.append(vertex_)
+        for edge_ in adjacency_list[vertex_]:
+            if edge_[0] == vertex_label and edge_[2]:
+                in_edges.append(edge_)
 
     vertex_adjacent_list = {
         "in": in_edges,
