@@ -48,7 +48,6 @@ def check_if_are_adjacents(vertex_1, vertex_2, graph):
     return False
 
 
-# TODO: ajeitar isso que ta quebrando
 def vertex_degree(vertex_label, graph):
     """Get vertex adjacent degree count."""
     adjacency_list = adjacency_list_(graph)
