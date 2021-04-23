@@ -46,7 +46,7 @@ Frontend:
 
 - Creation of a low-fidelity prototype using Figma, to better visualize how the solution would look in the end.
 
-![images/Untitled1..png](images/Untitled1..png)
+![images/Untitled1.png](images/Untitled1.png)
 
 - Beginning of the discussion on how the user's input would be, in addition to aligning how the request and response part would be between the applications.
 
