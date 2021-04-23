@@ -7,8 +7,16 @@ const mapStateToProps = (state) => ({
   loading: get.loading(state),
 });
 
+const actions = {
+  'node': ({node}) => Creators.selectNode(node),
+  'edge': ({edge}) => () => {},
+  'none': () => Creators.deselectNode(),
+}
+
 const mapDispatchToProps = (dispatch) => ({
-  onPress: ({edges: [edge]}) =>  dispatch(Creators.selectNode(edge)),
+  onSelect: ({ edges: [edge = null], nodes: [node = null] }) => {
+    return dispatch(Creators.selectNode(node));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Network);

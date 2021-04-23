@@ -11,12 +11,20 @@ const { Types, Creators } = createActions({
   setTextInput: ['textInput'],
 
   syncGraphData: null,
-  syncGraphDataSuccess: ['graphData'],
+  syncGraphDataSuccess: ['graphData', 'graphOrder', 'graphSize'],
   syncGraphDataError: null,
 
   selectNode: ['selectedNode'],
   selectNodeSuccess: ['selectedNodeData'],
   selectNodeError: null,
+
+  deselectNode: null,
+
+  deleteSelectedNode: null,
+  deleteSelectedNodeSuccess: null,
+  deleteSelectedNodeError: null,
+
+  reset: null,
 });
 
 export default Creators;
@@ -25,6 +33,8 @@ export { Types };
 const INITIAL_STATE = {
   values: [],
   graphData: { nodes: [], edges: [] },
+  graphOrder: 0,
+  graphSize: 0,
   loading: false,
   textInput: '',
   validating: false,
@@ -60,15 +70,25 @@ export const reducer = createReducer(INITIAL_STATE, {
   }),
   [Types.SYNC_GRAPH_DATA_SUCCESS]: (
     state,
-    { graphData = INITIAL_STATE.graphData }
+    {
+      graphData = INITIAL_STATE.graphData,
+      graphOrder = INITIAL_STATE.graphOrder,
+      graphSize = INITIAL_STATE.graphSize,
+    }
   ) => ({
     ...state,
     loading: false,
     graphData,
+    graphOrder,
+    graphSize,
   }),
   [Types.SYNC_GRAPH_DATA_ERROR]: (state) => ({
     ...state,
     loading: false,
+    graphData: INITIAL_STATE.graphData,
+    graphOrder: INITIAL_STATE.graphOrder,
+    graphSize: INITIAL_STATE.graphSize,
+    values: []
   }),
 
   [Types.SET_TEXT_INPUT]: (state, { textInput }) => ({
@@ -92,6 +112,28 @@ export const reducer = createReducer(INITIAL_STATE, {
     loadingNodeData: false,
     selectedNodeData: null,
   }),
+
+  [Types.DESELECT_NODE]: (state) => ({
+    ...state,
+    loadingNodeData: false,
+    selectedNodeData: false,
+    selectedNode: INITIAL_STATE.selectedNode,
+  }),
+
+  [Types.DELETE_SELECTED_NODE]: (state) => ({
+    ...state,
+    loading: true,
+  }),
+  [Types.DELETE_SELECTED_NODE_SUCCESS]: (state) => ({
+    ...state,
+    loading: false,
+  }),
+  [Types.DELETE_SELECTED_NODE_ERROR]: (state) => ({
+    ...state,
+    loading: false,
+  }),
+
+  [Types.RESET]: () => INITIAL_STATE,
 });
 
 const root = (state) => state['MainReducer'];
@@ -102,10 +144,11 @@ export const get = {
   loading: (state) => root(state).loading,
   textInput: (state) => root(state).textInput,
   validating: (state) => root(state).validating,
+  graphOrder: (state) => root(state).graphOrder,
+  graphSize: (state) => root(state).graphSize,
 };
 
 export const getNode = {
   selectedNode: (state) => root(state).selectedNode,
   selectedNodeData: (state) => root(state).selectedNodeData,
-
 };

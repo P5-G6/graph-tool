@@ -8,13 +8,12 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 graph = Graph()
-CORS(app, support_credentials=True)
 
 
 @app.route('/adjacency-list', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def get_adjacency_list():
-    """Hello flask."""
+    """Get Adjacency List endpoint."""
     if graph.vertices:
         adjacency_list = services.adjacency_list_(graph)
     else:
@@ -27,7 +26,7 @@ def get_adjacency_list():
     response = {"statusCode": 200,
                 "headers": {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'http://localhost:3000'},
+                    'Access-Control-Allow-Origin': '*'},
                 "body": adjacency_list
                 }
     return response
@@ -36,7 +35,7 @@ def get_adjacency_list():
 @app.route('/graph-order', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def get_graph_order():
-    """Hello flask."""
+    """Get Graph order enpoint."""
     if graph.vertices:
         graph_order = services.graph_order(graph)
     else:
@@ -58,7 +57,7 @@ def get_graph_order():
 @app.route('/graph-size', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def get_graph_size():
-    """Hello flask."""
+    """Get Graph Size enpoint."""
     if graph.vertices:
         graph_size = services.graph_size(graph)
     else:
@@ -80,7 +79,7 @@ def get_graph_size():
 @app.route('/check-if-are-adjacents', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def get_check_if_are_adjacents():
-    """Hello flask."""
+    """Check if are adjacents endpoint."""
     vertex_1 = request.args.get('vertex_1')
     vertex_2 = request.args.get('vertex_2')
 
@@ -107,7 +106,7 @@ def get_check_if_are_adjacents():
 @app.route('/vertex-degree', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def get_vertex_degree():
-    """Hello flask."""
+    """Get vertex degree endpoint."""
     vertex = request.args.get('vertex')
 
     if graph.vertices:
@@ -131,7 +130,7 @@ def get_vertex_degree():
 @app.route('/vertex-adjacent-list', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def get_vertex_adjacent_list():
-    """Hello flask."""
+    """Get Vertex adjacent list endpoint."""
     vertex = request.args.get('vertex')
     if graph.vertices:
         vertex_adjacent_list = services.vertex_adjacent_list(vertex, graph)
@@ -154,7 +153,7 @@ def get_vertex_adjacent_list():
 @app.route('/graph/add-vertex', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def post_add_vertex():
-    """Hello flask."""
+    """Post add vertex endpoint."""
     request_json = request.get_json()
     vertex = request_json["vertex_label"]
     if vertex in graph.vertices:
@@ -179,7 +178,7 @@ def post_add_vertex():
 @app.route('/graph/add-edge', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def post_add_edge():
-    """Hello flask."""
+    """Post add edge endpoint."""
     request_json = request.get_json()
     edge = request_json['edge']
     graph.add_vertex(vertex_label=edge[0],
@@ -199,7 +198,7 @@ def post_add_edge():
 @app.route('/graph/delete_vertex', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def post_delete_vertex():
-    """Hello flask."""
+    """Post delete edge endpoint."""
     request_json = request.get_json()
     vertex_label = request_json["vertex_label"]
     if vertex_label in graph.vertices:
@@ -225,7 +224,7 @@ def post_delete_vertex():
 @app.route('/graph/delete_edge', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def post_delete_edge():
-    """Hello flask."""
+    """Post delete edge endpoint."""
     request_json = request.get_json()
     edge = request_json["edge"]
 
@@ -261,7 +260,7 @@ def post_delete_edge():
 @app.route('/graph/delete_graph', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def get_clear_graph():
-    """Hello flask."""
+    """Get clear_graph endpoint."""
     graph.clear_graph()
 
     response = {"statusCode": 200,

@@ -13,16 +13,16 @@ export default function RenderItem({
 }) {
   return (
     <Container>
-      <div className='section primary-section'>
-        <div className='value'>{index}</div>
-        <div className='value right' style={{ justifyContent: 'flex-end' }}>
+      <div className='render-item-section primary-section'>
+        <div className='item-value'>{index}</div>
+        <div className='item-value right' style={{ justifyContent: 'flex-end' }}>
           {weight}
         </div>
       </div>
-      <div className='section'>
-        <div className='value'>{from}</div>
-        {directioned && <FiArrowRightCircle className='icon' />}
-        <div className='value right' style={{ justifyContent: 'flex-end' }}>
+      <div className='render-item-section'>
+        <div className='item-value'>{from}</div>
+        {directioned && <FiArrowRightCircle className='item-icon' />}
+        <div className='item-value right' style={{ justifyContent: 'flex-end' }}>
           {to}
         </div>
       </div>

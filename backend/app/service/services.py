@@ -48,7 +48,6 @@ def check_if_are_adjacents(vertex_1, vertex_2, graph):
     return False
 
 
-# TODO: ajeitar isso que ta quebrando
 def vertex_degree(vertex_label, graph):
     """Get vertex adjacent degree count."""
     adjacency_list = adjacency_list_(graph)
@@ -72,7 +71,7 @@ def vertex_degree(vertex_label, graph):
     adjacency_list = adjacency_list.pop(vertex_label)
 
     for vertex_ in adjacency_list:
-        if str(vertex_[0]) == vertex_label and vertex_[2]:
+        if vertex_[0] == vertex_label and vertex_[2]:
             in_edges += 1
 
     degree = {
@@ -107,7 +106,7 @@ def vertex_adjacent_list(vertex_label, graph):
     adjacency_list = adjacency_list.pop(vertex_label)
 
     for vertex_ in adjacency_list:
-        if str(vertex_[0]) == vertex_label and vertex_[2]:
+        if vertex_[0] == vertex_label and vertex_[2]:
             in_edges.append(vertex_)
 
     vertex_adjacent_list = {

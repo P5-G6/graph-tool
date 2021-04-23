@@ -6,17 +6,22 @@ export default function TextInput({
   value = '',
   onChange = null,
   placeholder = '',
-  onSubmit = null
+  onSubmit = null,
+  disabled = false,
 }) {
   const handleChange = ({ target: { value: inputValue } }) => {
     if (onChange) onChange(inputValue);
   };
 
   const handleSubmit = () => {
-    if(onSubmit) onSubmit();
-  }
+    if (onSubmit) onSubmit();
+  };
 
   return (
-    <Input placeholder={placeholder} onChange={handleChange} value={value} onSubmit={handleSubmit} />
+    <Input
+      {...{ disabled, placeholder, value }}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+    />
   );
 }

@@ -13,7 +13,8 @@ export default function adaptNetwork(data = {}) {
       const edges = foundEdges.map(([to, value, directioned = false]) => ({
         from: curr,
         to,
-        label: value,
+        title: value,
+        label: `${value}`,
         ...useArrow(directioned),
       }));
 

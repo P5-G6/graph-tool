@@ -8,7 +8,7 @@ export const Container = styled.div`
   border-radius: 10px;
   height: 65px;
 
-  .section {
+  .render-item-section {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -21,15 +21,17 @@ export const Container = styled.div`
     background-color: #fff;
   }
 
-  .value {
+  .item-value {
     display: flex;
     flex: 1;
     font-size: 15;
     font-weight: bold;
+    color: #000;
   }
 
-  .icon {
+  .item-icon {
     font-size: 20px;
     justify-content: center;
+    color: #000;
   }
 `;

@@ -14,16 +14,17 @@ import { Container } from './styles';
 //     { from: 1, to: 2, label: 'teste' },
 //     { from: 1, to: 3, label: 'teste' },
 //     { from: 2, to: 4 },
-//     { from: 2, to: 5 },
+//     { fr om: 2, to: 5 },
 //   ],
 // };
 
-function Network({ nodes = [], edges = [], loading = false, onPress = null }) {
+function Network({ nodes = [], edges = [], loading = false, onSelect = null }) {
   const handlePress = useCallback(
     (event) => {
-      if (onPress) onPress(event);
+      console.log('event', event)
+      if (onSelect) onSelect(event);
     },
-    [onPress]
+    [onSelect]
   );
 
   const options = {

@@ -4,9 +4,6 @@ import List from '../../../../components/List';
 
 const getData = state => {
   const values = get.values(state);
-
-  console.log('Values', values);
-
   return values;
 }
 
