@@ -46,7 +46,7 @@ $ npm start
 - /components: General usage components
 - /containers: Application views
 
-![images/frontend/Untitled.png](images/frontend/Untitled1.png)
+![images/frontend/Untitled.png](https://github.com/P5-G6/graph-tool/blob/docs/images/Untitled.png)
 
 - / hooks: Custom hooks
 - / mocks: Mocks used to assist in offline development;
@@ -69,9 +69,9 @@ This reducer will be responsible for controlling the state of that part of the a
     - Middleware → In our case, Saga is being used, which captures the action, and performs actions, previously subscribed to the saga.
     - State → The state of our reducer;
 
-![images/frontend/riadAin.gif](images/frontend/riadAin.gif)
+![images/frontend/riadAin.gif](https://github.com/P5-G6/graph-tool/blob/docs/images/riadAin.gif)
 
-![images/frontend/Untitled%201.png](images/frontend/Untitled%201.png)
+![images/frontend/Untitled%201.png](https://github.com/P5-G6/graph-tool/blob/docs/images/Untitled%201.png)
 
 **REDUX SAGA**
 
@@ -81,9 +81,9 @@ This reducer will be responsible for controlling the state of that part of the a
 
 - To display the graphs, the Vis.JS library was used, as it has a simple initial configuration to use it and depends only on a declaration of the lines and nodes, for rendering it.
 
-![images/frontend/Untitled%202.png](images/frontend/Untitled%202.png)
+![images/frontend/Untitled%202.png](https://github.com/P5-G6/graph-tool/blob/docs/images/Untitled%202.png)
 
-![images/frontend/Untitled%203.png](images/frontend/Untitled%203.png)
+![images/frontend/Untitled%203.png](https://github.com/P5-G6/graph-tool/blob/docs/images/Untitled%203.png)
 
 **STYLED COMPONENTS**
 
