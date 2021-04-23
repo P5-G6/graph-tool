@@ -4,7 +4,7 @@ This section comprises all resources and processes related to the back-end of th
 
 # Setting up the environment
 
-![images/backend/Screen_Shot_2021-04-22_at_22.13.31.png](images/backend/Screen_Shot_2021-04-22_at_22.13.31.png)
+![images/backend/Screen_Shot_2021-04-22_at_22.13.31.png](https://github.com/P5-G6/graph-tool/blob/docs/images/Screen_Shot_2021-04-22_at_22.13.31.png)
 
 To set up the environment of the back-end we already set a `Makefile` the install the requirements to run the server, to do that run `make all`.
 To run the server you need to start the python virtual environment using `source .env/bin/activate` and run `make run`. This command should check if the requirements are installed and run the flask server.
@@ -20,7 +20,7 @@ To run the server you need to start the python virtual environment using `source
 
 # **Getting Started**
 
-![images/backend/Screen_Shot_2021-04-22_at_23.02.27.png](images/backend/Screen_Shot_2021-04-22_at_23.02.27.png)
+![images/backend/Screen_Shot_2021-04-22_at_23.02.27.png](https://github.com/P5-G6/graph-tool/blob/docs/images/Screen_Shot_2021-04-22_at_23.02.27.png)
 
 It's important to abstract the logic of applications, due to that we chose to split the application into 4 different sections:
 
@@ -51,7 +51,7 @@ The **Graph** is the class that implements a graph using an adjacency list. This
     }
 ```
 
-![images/backend/Screen_Shot_2021-04-22_at_23.54.32.png](images/backend/Screen_Shot_2021-04-22_at_23.54.32.png)
+![images/backend/Screen_Shot_2021-04-22_at_23.54.32.png](https://github.com/P5-G6/graph-tool/blob/docs/images/Screen_Shot_2021-04-22_at_23.54.32.png)
 
 This is an example of the representation of our system, that the key represents the vertex and the list its edges. 
 
