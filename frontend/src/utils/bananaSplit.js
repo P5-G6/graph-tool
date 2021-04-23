@@ -18,7 +18,7 @@ const bananaSplit = (value = '') => {
     ] = values;
 
     if (origin && destiny) {
-      result.value = [origin, destiny, weight, !!useDirection];
+      result.value = [origin, destiny, Number.parseInt(weight), !!useDirection];
       result.valid = true;
     } else {
       result.errors.push('invalid input');
