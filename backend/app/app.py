@@ -254,5 +254,19 @@ def post_delete_edge():
                     'Access-Control-Allow-Origin': '*'},
                 "body": deleted_edge
                 }
-    print(response)
+    return response
+
+
+@app.route('/graph/delete_graph', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_clear_graph():
+    """Hello flask."""
+    graph.clear_graph()
+
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"message": "graph reseted"}
+                }
     return response
