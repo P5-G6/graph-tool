@@ -1,6 +1,6 @@
-FrontEnd
+# FrontEnd
 
-Created: Apr 23, 2021 12:28 AM
+This section comprises all resources and processes related to the front-end of the base graph-oriented blockchain.
 
 ## Libraries:
 
