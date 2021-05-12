@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import CommonCard from '../../../../components/CommonCard';
 import TextInput from '../../../../components/TextInput';
 import api from '../../../../services/api';
@@ -36,7 +36,7 @@ export default function AdjacencyVerification() {
         setLoading(false);
       }
     }
-  });
+  },[input]);
 
   const handleInputChange = (value) => {
     setInput(value);
