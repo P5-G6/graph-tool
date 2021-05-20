@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Creators from "./redux/reducer";
 
-import Frame from '../../components/Frame';
+import ConnectedNetwork from "./connectedNetwork";
+import Frame from "../../components/Frame";
 
-import Layout from './components/Layout';
+import Layout from "./components/Layout";
 
 function MainScreen() {
-    return (
-        <Frame>
-            <Layout>
-                
-            </Layout>
-        </Frame>
-    );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(Creators.initialSync());
+  }, [dispatch]);
+
+  return (
+    <Frame>
+      <Layout>
+        <ConnectedNetwork />
+      </Layout>
+    </Frame>
+  );
 }
 
 export default MainScreen;
