@@ -1,4 +1,4 @@
-"""This file contains all the logic to the API."""
+"""This file contains the graph logic of the API."""
 
 
 def adjacency_list_(graph):
