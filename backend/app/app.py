@@ -1,5 +1,6 @@
 """Graph controller class."""
 import app.service.services_graph as services_graph
+import app.service.services_dijkstra as services_dijkstra
 from app.model.graph import Graph
 from flask import Flask
 from flask import request
@@ -270,5 +271,77 @@ def get_clear_graph():
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'},
                 "body": {"message": "graph reseted"}
+                }
+    return response
+
+
+@app.route('/dijkstra/least_cost_all', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_least_cost_all():
+    """Post delete edge endpoint."""
+    start_vertex = request.args.get('start_vertex')
+    least_cost = \
+        services_dijkstra.get_least_cost_all_vertices(graph,
+                                                      start_vertex)
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"least_cost": least_cost["least_cost"]}
+                }
+    return response
+
+
+@app.route('/dijkstra/least_sequence_all', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_least_sequence_all():
+    """Post delete edge endpoint."""
+    start_vertex = request.args.get('start_vertex')
+    least_sequence = \
+        services_dijkstra.get_least_sequence_all_vertices(graph,
+                                                          start_vertex)
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"least_sequence": least_sequence["least_sequence"]}
+                }
+    return response
+
+
+@app.route('/dijkstra/least_sequence', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_least_sequence():
+    """Post delete edge endpoint."""
+    start_vertex = request.args.get('start_vertex')
+    end_vertex = request.args.get('end_vertex')
+    least_sequence = services_dijkstra.dijkstra(graph,
+                                                start_vertex,
+                                                end_vertex)
+
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"least_sequence": least_sequence["least_sequence"]}
+                }
+    return response
+
+
+@app.route('/dijkstra/least_cost', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_least_cost():
+    """Post delete edge endpoint."""
+    start_vertex = request.args.get('start_vertex')
+    end_vertex = request.args.get('end_vertex')
+    least_cost = services_dijkstra.dijkstra(graph,
+                                            start_vertex,
+                                            end_vertex)
+
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"least_cost": least_cost["least_cost"]}
                 }
     return response
