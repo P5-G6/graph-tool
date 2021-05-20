@@ -17,10 +17,11 @@
     - [x]  Back-end
         - [x]  Create, update and delete a graph
         - [x]  Graph operations
-        - [ ]  Graph minimum cost path algorithms
-- [ ]  Graph-oriented blockchain(Still in discussion)
+        - [x]  Graph minimum cost path algorithms
+- [ ]  Graph-oriented blockchain
+	- [ ]  Network Concept
     - [ ]  Blocks implementation
-    - [ ]  Proof-of-work definition
+    - [ ]  Proof-of-Stake implementation
 
 ## Timeline
 
