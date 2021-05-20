@@ -11,7 +11,7 @@ function MainScreen() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(Creators.initialSync());
+    dispatch(Creators.sync());
   }, [dispatch]);
 
   return (

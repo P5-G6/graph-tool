@@ -7,8 +7,9 @@ export const Container = styled.button`
   justify-content: center;
   background-color: ${({ bgColor }) => bgColor};
   ${({ width }) => `width:${width};` ?? "min-width: 20px;"}
+  min-height: 25px;
   max-height: 40px;
-  border: none;
+  border: 1 px solid transparent;
 
   border-radius: 10px;
   padding: 5px 10px;

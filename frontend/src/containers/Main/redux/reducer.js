@@ -4,9 +4,9 @@ export const PATH = "MainView";
 
 const { Creators, Types } = createActions(
   {
-    initialSync: null,
-    initialSyncSuccess: null,
-    initialSyncError: null,
+    sync: null,
+    syncSuccess: null,
+    syncError: null,
 
     addNode: ["node"],
     addNodeSuccess: ["nodes"],
@@ -37,9 +37,9 @@ const INITIAL_STATE = {
 };
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.INITIAL_SYNC]: (state) => ({ ...state, loading: true }),
-  [Types.INITIAL_SYNC_SUCCESS]: (state) => ({ ...state, loading: false }),
-  [Types.INITIAL_SYNC_ERROR]: (state) => ({ ...state, loading: false }),
+  [Types.SYNC]: (state) => ({ ...state, loading: true }),
+  [Types.SYNC_SUCCESS]: (state) => ({ ...state, loading: false }),
+  [Types.SYNC_ERROR]: (state) => ({ ...state, loading: false }),
 
   [Types.ADD_NODE]: (state) => ({
     ...state,

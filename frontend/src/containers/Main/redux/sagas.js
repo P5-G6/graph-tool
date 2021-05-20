@@ -3,9 +3,9 @@ import { put, all, takeLatest } from "redux-saga/effects";
 
 function* syncSaga() {
   try {
-    return yield put(Creators.initialSyncError());
+    return yield put(Creators.syncError())
   } catch (error) {
-    return yield put(Creators.initialSyncError());
+    return yield put(Creators.syncError());
   }
 }
 

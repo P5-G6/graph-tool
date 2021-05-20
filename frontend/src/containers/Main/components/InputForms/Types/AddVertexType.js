@@ -9,19 +9,33 @@ export default function AddVertex({ onSubmit, onChange }) {
     <Container>
       <div className="input_row">
         <div className="input_item">
-          <Input onChange={(value) => onChange("nodeA", value)} />
+          <Input
+            type="dropdown"
+            onChange={(value) => onChange("nodeA", value)}
+          />
         </div>
         <div className="input_item">
-          <Input onChange={(value) => onChange("nodeB", value)} />
+          <Input
+            type="dropdown"
+            onChange={(value) => onChange("nodeB", value)}
+          />
         </div>
       </div>
-      <Button
-        label="Create"
-        labelColor="#fff"
-        backgroundColor="#000"
-        width="100%"
-        onPress={onSubmit}
-      />
+      <div className="input_row">
+        <Input
+          type="switch"
+          onChange={(value) => onChange("directioned", value)}
+        />
+        <div className="row_item">
+          <Button
+            label="Create"
+            labelColor="#fff"
+            backgroundColor="#000"
+            width="100%"
+            onPress={onSubmit}
+          />
+        </div>
+      </div>
     </Container>
   );
 }

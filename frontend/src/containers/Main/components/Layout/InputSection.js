@@ -12,13 +12,7 @@ import useTransition from "../../../../components/hooks/transition";
 import styled from "styled-components";
 import InputForms from "../InputForms";
 
-import {
-  slideInBottom,
-  slideInTop,
-  slideOutBottom,
-  slideOutLeft,
-  slideOutTop,
-} from "../../../../appassets";
+import { slideInTop, slideOutTop } from "../../../../appassets";
 
 const Transitions = {
   "open-transition": slideInTop,
