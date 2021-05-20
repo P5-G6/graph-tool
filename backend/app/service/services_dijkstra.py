@@ -38,7 +38,7 @@ def get_least_sequence_all_vertices(graph, vertex_label):
 
 
 def dijkstra(graph, start_vertex, end_vertex):
-    """Dijkstra algorithm."""
+    """Dijkstra/Belman-Ford algorithm."""
     graph_transformed = {}
 
     adjacency_list = services_graph.adjacency_list_(graph)
@@ -49,7 +49,7 @@ def dijkstra(graph, start_vertex, end_vertex):
 
     shortest_distance = {}
     unvisited = graph_transformed
-    infinity = 9999999
+    infinity = 9999999999999
     pred = {}
     path = []
 
