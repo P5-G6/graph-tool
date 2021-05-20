@@ -16,7 +16,7 @@ To run the server you need to start the python virtual environment using `source
 - flask
 - pytest
 - urllib3
-- flas_cors
+- flask_cors
 
 # **Getting Started**
 
@@ -61,12 +61,20 @@ Each key points to a another object that is defined as the **Vertex** class that
 
 Here we have the operations that we can perform in the graph object, all of them receive the current graph as an argument. There is a list of all functions and their respective returns:
 
+1. Graph Services: 
+
 - `adjacency_list_(graph)` → returns the graph adjacency list as a dictionary
 - `graph_order(graph)` → returns an integer that represents the graph's order
 - `graph_size(graph)` → returns an integer that represents the graph's size
 - `check_if_are_adjacents(vertex_1, vertex_2, graph)` → receive 2 vertex and compare if        they are adjacents then returns a boolean.
 - `vertex_degree(vertex_label, graph)` → returns a dictionary that contains the number of edges(as degree) and if there are directional edges returns the ins and outs vertices.
 - `vertex_adjacent_list(vertex_label, graph)` → returns the vertex's adjacency list as applying the same logic as the vertex degree for directional and non-directional vertices.
+
+2. Dijkstra Services:
+
+- `get_least_cost_all_vertices(graph, vertex_label)` → returns least-cost path to each graph vertex.
+- `get_least_sequence_all_vertices(graph, vertex_label)` → returns least-cost path to each graph vertex.
+- `dijkstra(graph, start_vertex, end_vertex)` → returns path for start to end vertex Dijkstra/Belman-Ford algorithm.
 
 ## Controller
 
@@ -81,6 +89,10 @@ The `[app.py](http://app.py)` file is our Controller file, it has all the endpoi
 - `'/vertex-degree'`
 - `'/vertex-adjacent-list'`
 - `'/graph/delete_graph'`
+- `'/dijkstra/least_cost_all'`
+- `'/dijkstra/least_sequence_all'`
+- `'/dijkstra/least_sequence'`
+- `'/dijkstra/least_cost'`
 
 **POST:**
 

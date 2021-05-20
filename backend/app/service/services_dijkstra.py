@@ -60,14 +60,16 @@ def dijkstra(graph, start_vertex, end_vertex):
     while unvisited:
         least_vertex = None
         for vertex in unvisited:
-            if least_vertex is None:
+            if not least_vertex:
                 least_vertex = vertex
             elif shortest_distance[vertex] < shortest_distance[least_vertex]:
                 least_vertex = vertex
 
         for p_vertex, weight in graph_transformed[least_vertex].items():
-            if weight + shortest_distance[least_vertex] < shortest_distance[p_vertex]:
-                shortest_distance[p_vertex] = weight + shortest_distance[least_vertex]
+            if (weight + shortest_distance[least_vertex] <
+                    shortest_distance[p_vertex]):
+                shortest_distance[p_vertex] = weight + \
+                    shortest_distance[least_vertex]
                 pred[p_vertex] = least_vertex
 
         unvisited.pop(least_vertex)
@@ -87,34 +89,3 @@ def dijkstra(graph, start_vertex, end_vertex):
     if shortest_distance[end_vertex] != infinity:
         return {"least_cost": shortest_distance[end_vertex],
                 "least_path": path}
-
-if __name__ == '__main__':
-    graph = Graph()
-    graph.add_vertex("A")
-    graph.add_vertex("B")
-    graph.add_vertex("C")
-    graph.add_vertex("D")
-    graph.add_vertex("E")
-    graph.add_vertex("F")
-    graph.add_vertex("A", adjacent="B", weight=10, direction=True)
-    graph.add_vertex("B", adjacent="F", weight=15, direction=True)
-    graph.add_vertex("F", adjacent="E", weight=5, direction=True)
-    graph.add_vertex("B", adjacent="D", weight=12, direction=True)
-    graph.add_vertex("D", adjacent="F", weight=1, direction=True)
-    graph.add_vertex("D", adjacent="E", weight=2, direction=True)
-    graph.add_vertex("A", adjacent="C", weight=15, direction=True)
-    graph.add_vertex("C", adjacent="E", weight=10, direction=True)
-
-    # g = {}
-
-    # adjacency_list = services_graph.adjacency_list_(graph)
-    # for vertex in adjacency_list:
-    #     g[vertex] = {}
-    #     for edge in adjacency_list[vertex]:
-    #         g[vertex][edge[0]] = edge[1]
-
-    # print(g)
-    dijkstra(graph, "A", "E")
-    print(get_least_cost_all_vertices(graph, "A"))
-    print(get_least_sequence_all_vertices(graph, "A"))
-    print(dijkstra(graph, "A", "E"))
