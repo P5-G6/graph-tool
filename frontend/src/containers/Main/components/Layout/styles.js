@@ -26,6 +26,8 @@ export const Container = styled.div`
     right: 10px;
 
     background-color: ${palette.background};
+
+    z-index: 500;
 `;
 
 export const Content = styled.div`

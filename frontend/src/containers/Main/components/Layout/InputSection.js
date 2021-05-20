@@ -39,15 +39,13 @@ function InputSection() {
     setVisible(selectedOption != null);
   }, [selectedOption]);
 
-  return (
-    mode !== "hidden" && (
-      <Container {...{ mode }}>
-        <Card>
-          <InputForms type={selectedOption} />
-        </Card>
-      </Container>
-    )
-  );
+  return mode !== "hidden" ? (
+    <Container {...{ mode }}>
+      <Card>
+        <InputForms type={selectedOption} />
+      </Card>
+    </Container>
+  ) : null;
 }
 
 const Container = styled.div`
@@ -63,6 +61,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  z-index: 400;
 `;
 
 export default InputSection;
