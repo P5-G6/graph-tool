@@ -69,11 +69,13 @@ Finalization of the documentation, front-end and bug fixes.
 # Second Implementation
 
 # Activities Table
-![images/atividades.png](images/atividades.png)
+imagem da tabela(atividades.png)
 
 Backend Code - Implementing the code for the dijkstra algorithm in the backend
 
 Frontend Layout - Thinking about redesigning the frontend layout and how the new features would be implemented
+
+imagem do layout(layout.png)
 
 Frontend Code - Implementing code for the new layout and dijkstra algorithm for frontend
 
@@ -85,6 +87,12 @@ Tests - Time spent for:
 3) Testing the backend and frontend integration.
 
 Documentation - Working on the document
+
+## Dijkstra Algorithm
+
+### About
+### Pseudo Code
+### Complexity
 
 # About the project
 
