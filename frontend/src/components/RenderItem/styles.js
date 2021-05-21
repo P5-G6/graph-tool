@@ -8,6 +8,9 @@ export const Container = styled.div`
   border-radius: 10px;
   height: 65px;
 
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+
   .render-item-section {
     display: flex;
     flex-direction: row;

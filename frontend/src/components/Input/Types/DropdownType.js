@@ -128,5 +128,7 @@ const OptionsList = styled.div`
   animation-name: ${({ transition }) => transition};
   animation-duration: ${DURATION / 1000}s;
 
+  z-index: 800;
+
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;

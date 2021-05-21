@@ -10,7 +10,9 @@ const Row = ({ label = "", values = "", loading = false }) => (
 );
 
 const formatText = (values = []) => {
-  return values.length > 1 ? values.join(", ") : values;
+  return typeof values !== "string" && values.length > 1
+    ? values.join(", ")
+    : values;
 };
 
 export default function InputType({ adjacency = {}, sequence = {} }) {
@@ -27,7 +29,10 @@ export default function InputType({ adjacency = {}, sequence = {} }) {
         label="Sequence"
         values={formatText(sequence.values?.body?.least_sequence?.least_path)}
       />
-      <Row label="Adjacent" values={`${adjacency.values?.body?.are_adjacents}`} />
+      <Row
+        label="Adjacent"
+        values={`${adjacency.values?.body?.are_adjacents}`}
+      />
     </Container>
   );
 }

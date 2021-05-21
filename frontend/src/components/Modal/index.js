@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Container } from './styles';
 
-import CommonCard from '../CommonCard';
+import Card from '../Card';
 
 function Modal({ visible = false, children, position = 'right' }) {
   return (
     visible && (
       <Container {...{position}}>
-        <CommonCard>{children}</CommonCard>
+        <Card>{children}</Card>
       </Container>
     )
   );
