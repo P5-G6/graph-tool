@@ -4,20 +4,17 @@ import styled from "styled-components";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
 
-export default function ItemInfo({
-  from = "",
-  to = "",
-  cost = 0,
-  sequence,
-}) {
-    console.log('sequence', sequence)
+export default function ItemInfo({ from = "", to = "", cost = 0, sequence }) {
+  console.log("sequence", sequence);
   return (
     <Container>
       <Label>
         {from} <AiOutlineArrowRight /> {to}
       </Label>
       <Cost>{cost}</Cost>
-      <Sequence>{typeof sequence === 'string' ? sequence : sequence.join(' => ')}</Sequence>
+      <Sequence>
+        {typeof sequence === "string" ? sequence : sequence.join(" => ")}
+      </Sequence>
     </Container>
   );
 }
@@ -31,9 +28,7 @@ const Container = styled.div`
   height: 25px;
   width: 100%;
 
-  
-  overflow-x: scroll;
-  overflow-y: hidden;
+  flex-grow: 0;
 `;
 
 const Label = styled.div`
@@ -68,4 +63,12 @@ const Sequence = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
+  overflow: scroll;
+  white-space: nowrap;
+
+  .values {
+    display: flex;
+    flex-direction
+  }
 `;

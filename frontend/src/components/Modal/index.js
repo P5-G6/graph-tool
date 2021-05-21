@@ -1,13 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { Container } from './styles';
+import { Container } from "./styles";
 
-import Card from '../Card';
+import Card from "../Card";
+import useTransiion from "../hooks/transition";
 
-function Modal({ visible = false, children, position = 'right' }) {
+const DURATION = 500;
+
+function Modal({ visible = false, children, position = "right" }) {
+  const { mode } = useTransiion({ visible, duration: DURATION });
+
   return (
-    visible && (
-      <Container {...{position}}>
+    mode !== "hidden" && (
+      <Container {...{ mode }} duration={DURATION} {...{ position }}>
         <Card>{children}</Card>
       </Container>
     )
