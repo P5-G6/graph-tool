@@ -17,11 +17,13 @@
     - [x]  Back-end
         - [x]  Create, update and delete a graph
         - [x]  Graph operations
-        - [x]  Graph minimum cost path algorithms
+        - [x]  Graph minimum cost path algorithms(Dijkstra)
 - [ ]  Graph-oriented blockchain
 	- [ ]  Network Concept
     - [ ]  Blocks implementation
     - [ ]  Proof-of-Stake implementation
+
+# First Implementation
 
 ## Timeline
 
@@ -63,6 +65,26 @@ We started writing documentation for both applications. The whole part of the Ba
 ## 22/04(Thursday) → 4h
 
 Finalization of the documentation, front-end and bug fixes.
+
+# Second Implementation
+
+# Activities Table
+![images/Screen_Shot_2021-04-22_at_23.44.43.png](images/image.png)
+
+Backend Code - Implementing the code for the dijkstra algorithm in the backend
+
+Frontend Layout - Thinking about redesigning the frontend layout and how the new features would be implemented
+
+Frontend Code - Implementing code for the new layout and dijkstra algorithm for frontend
+
+Intregation - Implement backend and frontend integration
+
+Documentation - Working on the document
+
+Tests - Time spent for:
+1) Test the functioning of the dijkstra algorithm on the backend, making the test with more than one example of graphs.
+2) The operation of the new frontend layout in addition to the use of a mock to evaluate the operation of the djkstra algorithm by the frontend.
+3) Testing the backend and frontend integration.
 
 # About the project
 
