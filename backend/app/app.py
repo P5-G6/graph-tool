@@ -1,5 +1,6 @@
 """Graph controller class."""
-import app.service.services as services
+import app.service.services_graph as services_graph
+import app.service.services_dijkstra as services_dijkstra
 from app.model.graph import Graph
 from flask import Flask
 from flask import request
@@ -15,7 +16,7 @@ graph = Graph()
 def get_adjacency_list():
     """Get Adjacency List endpoint."""
     if graph.vertices:
-        adjacency_list = services.adjacency_list_(graph)
+        adjacency_list = services_graph.adjacency_list_(graph)
     else:
         return {"error": "Graph does not exists"}
 
@@ -37,7 +38,7 @@ def get_adjacency_list():
 def get_graph_order():
     """Get Graph order enpoint."""
     if graph.vertices:
-        graph_order = services.graph_order(graph)
+        graph_order = services_graph.graph_order(graph)
     else:
         return {"error": "Graph does not exists"}
 
@@ -59,7 +60,7 @@ def get_graph_order():
 def get_graph_size():
     """Get Graph Size enpoint."""
     if graph.vertices:
-        graph_size = services.graph_size(graph)
+        graph_size = services_graph.graph_size(graph)
     else:
         return {"error": "Graph does not exists"}
 
@@ -84,9 +85,10 @@ def get_check_if_are_adjacents():
     vertex_2 = request.args.get('vertex_2')
 
     if graph.vertices:
-        are_adjacents = services.check_if_are_adjacents(vertex_1,
-                                                        vertex_2,
-                                                        graph)
+        are_adjacents = \
+            services_graph.check_if_are_adjacents(vertex_1,
+                                                  vertex_2,
+                                                  graph)
     else:
         return {"error": "Graph does not exists"}
 
@@ -110,7 +112,7 @@ def get_vertex_degree():
     vertex = request.args.get('vertex')
 
     if graph.vertices:
-        vertex_degree = services.vertex_degree(vertex, graph)
+        vertex_degree = services_graph.vertex_degree(vertex, graph)
     else:
         return {"error": "Graph does not exists"}
 
@@ -133,7 +135,8 @@ def get_vertex_adjacent_list():
     """Get Vertex adjacent list endpoint."""
     vertex = request.args.get('vertex')
     if graph.vertices:
-        vertex_adjacent_list = services.vertex_adjacent_list(vertex, graph)
+        vertex_adjacent_list = services_graph.vertex_adjacent_list(vertex,
+                                                                   graph)
     else:
         return {"error": "Graph does not exists"}
 
@@ -268,5 +271,77 @@ def get_clear_graph():
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'},
                 "body": {"message": "graph reseted"}
+                }
+    return response
+
+
+@app.route('/dijkstra/least_cost_all', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_least_cost_all():
+    """Post delete edge endpoint."""
+    start_vertex = request.args.get('start_vertex')
+    least_cost = \
+        services_dijkstra.get_least_cost_all_vertices(graph,
+                                                      start_vertex)
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"least_cost": least_cost}
+                }
+    return response
+
+
+@app.route('/dijkstra/least_sequence_all', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_least_sequence_all():
+    """Post delete edge endpoint."""
+    start_vertex = request.args.get('start_vertex')
+    least_sequence = \
+        services_dijkstra.get_least_sequence_all_vertices(graph,
+                                                          start_vertex)
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"least_sequence": least_sequence}
+                }
+    return response
+
+
+@app.route('/dijkstra/least_sequence', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_least_sequence():
+    """Post delete edge endpoint."""
+    start_vertex = request.args.get('start_vertex')
+    end_vertex = request.args.get('end_vertex')
+    least_sequence = services_dijkstra.dijkstra(graph,
+                                                start_vertex,
+                                                end_vertex)
+
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"least_sequence": least_sequence}
+                }
+    return response
+
+
+@app.route('/dijkstra/least_cost', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def get_least_cost():
+    """Post delete edge endpoint."""
+    start_vertex = request.args.get('start_vertex')
+    end_vertex = request.args.get('end_vertex')
+    least_cost = services_dijkstra.dijkstra(graph,
+                                            start_vertex,
+                                            end_vertex)
+
+    response = {"statusCode": 200,
+                "headers": {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'},
+                "body": {"least_cost": least_cost}
                 }
     return response

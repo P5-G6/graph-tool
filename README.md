@@ -17,10 +17,13 @@
     - [x]  Back-end
         - [x]  Create, update and delete a graph
         - [x]  Graph operations
-        - [ ]  Graph minimum cost path algorithms
-- [ ]  Graph-oriented blockchain(Still in discussion)
+        - [x]  Graph minimum cost path algorithms(Dijkstra)
+- [ ]  Graph-oriented blockchain
+	- [x]  Network Concept
     - [ ]  Blocks implementation
-    - [ ]  Proof-of-work definition
+    - [ ]  Proof-of-Stake implementation
+
+# First Implementation
 
 ## Timeline
 
@@ -36,7 +39,7 @@ Front-end → A quick search was made to find a library for better visualization
 
 ![https://i.pinimg.com/236x/e1/df/59/e1df59c6d0ca7aaf3746c2238e075c48.jpg](https://i.pinimg.com/236x/e1/df/59/e1df59c6d0ca7aaf3746c2238e075c48.jpg)
 
-## 17/04(Saturday) → 3h gastas
+## 17/04(Saturday) → 3h
 
 With the leaving of one of the group members, a brief discussion was made of how the division of the activity's work would be from that moment on, so it was decided that everything that had already been decided and done would be maintained, but only one member would be left with the Back-end, receiving support from the other two members who would be responsible for the Front-end. To test each application, mocks were used throughout the process, while the integration was not carried out.
 
@@ -63,6 +66,70 @@ We started writing documentation for both applications. The whole part of the Ba
 
 Finalization of the documentation, front-end and bug fixes.
 
+# Second Implementation
+
+## Activities Table
+imagem da tabela(atividades.png)
+
+Backend Code - Implementing the code for the dijkstra algorithm in the backend
+
+Frontend Layout - Thinking about redesigning the frontend layout and how the new features would be implemented
+
+imagem do layout(layout.png)
+
+Frontend Code - Implementing code for the new layout and dijkstra algorithm for frontend
+
+Intregation - Implement backend and frontend integration
+
+Tests - Time spent for:
+1) Test the functioning of the dijkstra algorithm on the backend, making the test with more than one example of graphs.
+2) The operation of the new frontend layout in addition to the use of a mock to evaluate the operation of the djkstra algorithm by the frontend.
+3) Testing the backend and frontend integration.
+
+Documentation - Working on the document
+
+## Dijkstra Algorithm
+
+### About
+
+Dijkstra's Algorithm is used to find the shortest path between nodes in a graph. Particularly, you can find the shortest path from a node (called the "source node") to all other nodes in the graph, producing a shortest-path tree. Dijkstra's Algorithm can only work with graphs that have positive weights. This is because, during the process, the weights of the edges have to be added to find the shortest path. If there is a negative weight in the graph, then the algorithm will not work properly. Once a node has been marked as "visited", the current path to that node is marked as the shortest path to reach that node. And negative weights can alter this if the total weight can be decremented after this step has occurred. The algorithm consists of the following steps:
+
+1)Initialization of all nodes with distance "infinite";initialization of the starting node with 0
+
+2)Marking of the distance of the starting node as permanent, all other distances as temporarily.
+
+3)Setting of starting node as active.
+
+4)Calculation of the temporary distances of all neighbour nodes of the active node by summing up its distance with the weights of the edges.
+
+5)If such a calculated distance of a node is smaller as the current one, update the distance and set the current node as antecessor. This step is also called update and is Dijkstra's central idea.
+
+6)Setting of the node with the minimal temporary distance as active. Mark its distance as permanent.
+
+7)Repeating of steps 4 to 7 until there aren't any nodes left with a permanent distance, which neighbours still have temporary distances.
+
+### Pseudo Code
+
+```
+function Dijkstra(Graph, source):
+  for each vertex v in Graph:	// Initialization
+    dist[v] := infinity	// initial distance from source to vertex v is set to infinite
+    previous[v] := undefined	// Previous node in optimal path from source
+  dist[source] := 0	// Distance from source to source
+  Q := the set of all nodes in Graph	// all nodes in the graph are unoptimized - thus are in Q
+  while Q is not empty:	// main loop
+    u := node in Q with smallest dist[ ]
+    remove u from Q
+    for each neighbor v of u:	// where v has not yet been removed from Q.
+      alt := dist[u] + dist_between(u, v)
+      if alt < dist[v]	// Relax (u,v)
+        dist[v] := alt
+        previous[v] := u
+return previous[]
+  ```
+  
+the Complexity of the dijkstra algorithm is O(n^2)
+
 # About the project
 
 ![images/Screen_Shot_2021-04-22_at_23.44.43.png](images/Screen_Shot_2021-04-22_at_23.44.43.png)
@@ -81,3 +148,16 @@ For example let's sai that we have the graph below:
 ![images/Screen_Shot_2021-04-23_at_00.02.46.png](images/Screen_Shot_2021-04-23_at_00.02.46.png)
 
 The path that we want to reach is E → A, so the less costly path is E → D → C → B → A. So the worker that finds this path first will validate the transaction. Keep in mind that is a simple example and can be way more complex as the graph grows.
+
+## Network Concept
+
+For the network rules, we decided to use a delegated proof-of-stake as consensus mechanisms.  That means that owners can delegate their tokens to validators, to become a validator you need to hold a minimum amount of tokens that can be or not delegated to you, as the network grows that amount increase accordingly.
+
+The network will initially use 1-5-1 validation:
+1 -> A graph will be generated by this validator using a pre-defined algorithm by the network and 2 vertices will be randomly chosen to find the costless path.
+
+5 -> Five validators will be picked to find the path, all of them had to find the path using their algorithms, resources, thread management, and so on. They are free to use any algorithm to figure out the costless path.
+
+1 -> After the previous 5 validators submit their answer to the graph, the final one will call voting to validate which costless paths are correct.
+When a consensus is reached, the current validator can do the minting of the block.
+Those validators who agreed in a consensus will be rewarded accordingly their throughput time, also the ones that created the graph and minted the block.
