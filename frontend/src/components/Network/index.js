@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
-import Graph from 'react-vis-network-graph';
-import { Container } from './styles';
+import React, { useEffect, useCallback } from "react";
+import Graph from "react-vis-network-graph";
+import { Container } from "./styles";
 
 // const mock = {
 //   nodes: [
@@ -19,9 +19,9 @@ import { Container } from './styles';
 // };
 
 function Network({ nodes = [], edges = [], loading = false, onSelect = null }) {
+  console.log("network", nodes, edges, loading);
   const handlePress = useCallback(
     (event) => {
-      console.log('event', event)
       if (onSelect) onSelect(event);
     },
     [onSelect]
@@ -32,10 +32,10 @@ function Network({ nodes = [], edges = [], loading = false, onSelect = null }) {
       hierarchical: false,
     },
     edges: {
-      color: '#000000',
+      color: "#000000",
     },
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   };
 
   const events = {

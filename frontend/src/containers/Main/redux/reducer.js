@@ -1,154 +1,138 @@
-import { createActions, createReducer } from 'reduxsauce';
+import { createActions, createReducer } from "reduxsauce";
 
-const { Types, Creators } = createActions({
-  updateValues: ['values'],
-  resetValues: null,
+export const PATH = "MainView";
 
-  pushValue: null,
-  pushValueSuccess: ['value'],
-  pushValueError: null,
+const { Creators, Types } = createActions(
+  {
+    sync: null,
+    syncSuccess: [
+      "nodes",
+      "edges",
+      "allDirectioned",
+      "graphOrder",
+      "graphSize",
+    ],
+    syncError: null,
 
-  setTextInput: ['textInput'],
+    addNode: ["node"],
+    addNodeSuccess: null,
+    addNodeError: null,
 
-  syncGraphData: null,
-  syncGraphDataSuccess: ['graphData', 'graphOrder', 'graphSize'],
-  syncGraphDataError: null,
+    addEdge: ["edge"],
+    addEdgeSuccess: null,
+    addEdgeError: null,
 
-  selectNode: ['selectedNode'],
-  selectNodeSuccess: ['selectedNodeData'],
-  selectNodeError: null,
+    selectNode: ["node"],
+    selectNodeSuccess: ["nodeData"],
+    selectNodeError: null,
 
-  deselectNode: null,
+    deleteNode: null,
 
-  deleteSelectedNode: null,
-  deleteSelectedNodeSuccess: null,
-  deleteSelectedNodeError: null,
-
-  reset: null,
-});
+    reset: null,
+  },
+  { prefix: `${PATH}/` }
+);
 
 export default Creators;
 export { Types };
 
 const INITIAL_STATE = {
-  values: [],
-  graphData: { nodes: [], edges: [] },
-  graphOrder: 0,
-  graphSize: 0,
-  loading: false,
-  textInput: '',
-  validating: false,
+  // SECTION GRAPHDATA:
+  nodes: [],
+  edges: [],
+  allDirectioned: false,
 
+  // SECTION DATA:
+  graphOrder: null,
+  graphSize: null,
+  loadingGraph: false,
+
+  // SECTION NODE:
   selectedNode: null,
-  selectedNodeData: null,
-  loadingNodeData: false,
+  nodeData: {},
+  loadingNode: false,
+
+  // SECTION MAIN:
+  loading: false,
 };
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.UPDATE_VALUES]: (state, { values }) => ({
-    ...state,
-    values,
-  }),
-  [Types.RESET_VALUES]: () => INITIAL_STATE,
-
-  [Types.PUSH_VALUE]: (state) => ({ ...state, validating: true }),
-  [Types.PUSH_VALUE_SUCCESS]: ({ values, ...state }, { value }) => ({
-    ...state,
-    values: [...values, value],
-    validating: false,
-    textInput: '',
-  }),
-  [Types.PUSH_VALUE_ERROR]: (state) => ({
-    ...state,
-    validating: false,
-    textInput: '',
-  }),
-
-  [Types.SYNC_GRAPH_DATA]: (state) => ({
-    ...state,
-    loading: true,
-  }),
-  [Types.SYNC_GRAPH_DATA_SUCCESS]: (
+  [Types.SYNC]: (state) => ({ ...state, loading: true }),
+  [Types.SYNC_SUCCESS]: (
     state,
-    {
-      graphData = INITIAL_STATE.graphData,
-      graphOrder = INITIAL_STATE.graphOrder,
-      graphSize = INITIAL_STATE.graphSize,
-    }
+    { nodes, edges, allDirectioned, graphOrder, graphSize }
   ) => ({
     ...state,
-    loading: false,
-    graphData,
+    nodes,
+    edges,
+    allDirectioned,
     graphOrder,
     graphSize,
-  }),
-  [Types.SYNC_GRAPH_DATA_ERROR]: (state) => ({
-    ...state,
     loading: false,
-    graphData: INITIAL_STATE.graphData,
-    graphOrder: INITIAL_STATE.graphOrder,
-    graphSize: INITIAL_STATE.graphSize,
-    values: []
+    selectedNode: null,
+  }),
+  [Types.SYNC_ERROR]: (state) => ({ ...state, loading: false }),
+
+  [Types.ADD_NODE]: (state) => ({
+    ...state,
+    loadingGraph: true,
+  }),
+  [Types.ADD_NODE_SUCCESS]: (state) => ({
+    ...state,
+    loadingGraph: false,
+  }),
+  [Types.ADD_NODE_ERROR]: (state) => ({
+    ...state,
+    loadingGraph: false,
   }),
 
-  [Types.SET_TEXT_INPUT]: (state, { textInput }) => ({
+  [Types.ADD_EDGE]: (state) => ({
     ...state,
-    textInput,
+    loadingGraph: true,
+  }),
+  [Types.ADD_EDGE_SUCCESS]: (state) => ({
+    ...state,
+    loadingGraph: false,
+  }),
+  [Types.ADD_EDGE_ERROR]: (state) => ({
+    ...state,
+    loadingGraph: false,
   }),
 
-  [Types.SELECT_NODE]: (state, { selectedNode }) => ({
+  [Types.SELECT_NODE]: (state, { node }) => ({
     ...state,
-    selectedNode,
-    loadingNodeData: true,
+    selectedNode: node,
+    loadingNode: true,
   }),
-
-  [Types.SELECT_NODE_SUCCESS]: (state, { selectedNodeData }) => ({
+  [Types.SELECT_NODE_SUCCESS]: (state, { nodeData }) => ({
     ...state,
-    selectedNodeData,
-    loadingNodeData: false,
+    loadingNode: false,
+    nodeData,
   }),
   [Types.SELECT_NODE_ERROR]: (state) => ({
     ...state,
-    loadingNodeData: false,
-    selectedNodeData: null,
+    selectedNode: null,
+    loadingNode: false,
+    nodeData: {},
   }),
 
-  [Types.DESELECT_NODE]: (state) => ({
-    ...state,
-    loadingNodeData: false,
-    selectedNodeData: false,
-    selectedNode: INITIAL_STATE.selectedNode,
-  }),
-
-  [Types.DELETE_SELECTED_NODE]: (state) => ({
-    ...state,
-    loading: true,
-  }),
-  [Types.DELETE_SELECTED_NODE_SUCCESS]: (state) => ({
-    ...state,
-    loading: false,
-  }),
-  [Types.DELETE_SELECTED_NODE_ERROR]: (state) => ({
-    ...state,
-    loading: false,
-  }),
+  [Types.DELETE_NODE]: (state) => ({ ...state }),
 
   [Types.RESET]: () => INITIAL_STATE,
 });
 
-const root = (state) => state['MainReducer'];
+export const getGraphData = {
+  nodes: (state) => state[PATH].nodes,
+  edges: (state) => state[PATH].edges,
+  loading: (state) => state[PATH].loadingGraph,
+};
 
-export const get = {
-  values: (state) => root(state).values,
-  graphData: (state) => root(state).graphData,
-  loading: (state) => root(state).loading,
-  textInput: (state) => root(state).textInput,
-  validating: (state) => root(state).validating,
-  graphOrder: (state) => root(state).graphOrder,
-  graphSize: (state) => root(state).graphSize,
+export const getMain = {
+  loading: (state) => state[PATH].loading,
 };
 
 export const getNode = {
-  selectedNode: (state) => root(state).selectedNode,
-  selectedNodeData: (state) => root(state).selectedNodeData,
+  selectedNode: (state) => state[PATH].selectedNode,
+  loading: (state) => state[PATH].loadingNode,
+  data: (state) => state[PATH].nodeData,
 };

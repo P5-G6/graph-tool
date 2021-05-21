@@ -1,22 +1,24 @@
-import React, { useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import Creators from './redux/reducer';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Creators from "./redux/reducer";
 
-import Frame from '../../components/Frame';
+import ConnectedNetwork from "./connectedNetwork";
+import Frame from "../../components/Frame";
 
-import Layout from './components/Layout';
-
-import ConnectedNetwork from './connectedNetwork';
+import Layout from "./components/Layout";
 
 function MainScreen() {
   const dispatch = useDispatch();
-  const handleFlush = useCallback(() => {
-    dispatch(Creators.reset());
-  }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch
+  // })
 
   useEffect(() => {
-    handleFlush(); // NOTE: Vai resetar os grafos toda vez que renderizar a tela
-  }, [handleFlush]);
+    dispatch(Creators.reset());
+    dispatch(Creators.sync());
+    return () => dispatch(Creators.reset());
+  }, [dispatch]);
 
   return (
     <Frame>

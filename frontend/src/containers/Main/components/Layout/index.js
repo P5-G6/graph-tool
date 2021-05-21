@@ -1,30 +1,33 @@
-import React from 'react';
+import React, { Fragment } from "react";
 
-import Sidebar from '../Sidebar';
+import Options from "./Options";
 
-import { Container } from './styles';
+import ContextProvider from "./context/provider";
+import InputSection from "./InputSection";
+import ConnectedModalContent from "./connectedModalContent";
+import ConnectedModal from "./connectedModal";
+import ConnectedModalCalculate from "./connectedNodeCalculateShow";
 
-import ConnectedModal from './connectedModal';
-import GraphInfosModal from '../GraphInfosModal';
-import ConnectedModalContent from './connectedModalContent';
-import AdjacencyVerification from '../AdjacencyVerification';
+const OPTIONS = [
+  { title: "Add Node", value: "add-node" },
+  { title: "Add Edge", value: "add-edge" },
+  { title: "Calculate", value: "calculate" },
+];
 
-function Layout({ children }) {
+export default function Layout({ children }) {
   return (
-    <>
+    <Fragment>
+      <ConnectedModal position='left'>
+        <ConnectedModalCalculate />
+      </ConnectedModal>
       <ConnectedModal>
         <ConnectedModalContent />
       </ConnectedModal>
-      <GraphInfosModal />
-      <AdjacencyVerification />
-      <Container>
-        <div className='side-bar'>
-          <Sidebar />
-        </div>
-        <div className='main-content'>{children}</div>
-      </Container>
-    </>
+      <ContextProvider>
+        <Options options={OPTIONS} />
+        <InputSection />
+      </ContextProvider>
+      {children}
+    </Fragment>
   );
 }
-
-export default Layout;

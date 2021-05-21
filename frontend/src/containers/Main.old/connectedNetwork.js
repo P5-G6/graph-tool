@@ -1,11 +1,10 @@
-import { connect } from "react-redux";
-import Network from "../../components/Network";
-import Creators, { getGraphData, getMain } from "./redux/reducer";
+import { connect } from 'react-redux';
+import Network from '../../components/Network';
+import Creators, { get } from './redux/reducer';
 
 const mapStateToProps = (state) => ({
-  loading: getMain.loading(state),
-  nodes: getGraphData.nodes(state),
-  edges: getGraphData.edges(state),
+  ...get.graphData(state),
+  loading: get.loading(state),
 });
 
 const actions = {

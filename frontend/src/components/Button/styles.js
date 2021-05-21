@@ -6,9 +6,10 @@ export const Container = styled.button`
   align-items: center;
   justify-content: center;
   background-color: ${({ bgColor }) => bgColor};
-  min-width: 20px; 
+  ${({ width }) => `width:${width};` ?? "min-width: 20px;"}
+  min-height: 25px;
   max-height: 40px;
-  border: none;
+  border: 1 px solid transparent;
 
   border-radius: 10px;
   padding: 5px 10px;
@@ -23,7 +24,7 @@ export const Container = styled.button`
 
   cursor: pointer;
 
-  transition: opacity .2s;
+  transition: opacity 0.2s;
 
   &:hover {
     opacity: 0.5;
