@@ -304,7 +304,7 @@ def get_least_sequence_all():
                 "headers": {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'},
-                "body": {"least_sequence": least_sequence["least_sequence"]}
+                "body": {"least_sequence": least_sequence}
                 }
     return response
 
@@ -323,7 +323,7 @@ def get_least_sequence():
                 "headers": {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'},
-                "body": {"least_sequence": least_sequence["least_sequence"]}
+                "body": {"least_sequence": least_sequence}
                 }
     return response
 
@@ -342,6 +342,6 @@ def get_least_cost():
                 "headers": {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'},
-                "body": {"least_cost": least_cost["least_cost"]}
+                "body": {"least_cost": least_cost}
                 }
     return response
