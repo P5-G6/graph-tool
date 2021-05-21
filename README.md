@@ -69,7 +69,7 @@ Finalization of the documentation, front-end and bug fixes.
 # Second Implementation
 
 # Activities Table
-![images/Screen_Shot_2021-04-22_at_23.44.43.png](images/image.png)
+![images/atividades.png](images/atividades.png)
 
 Backend Code - Implementing the code for the dijkstra algorithm in the backend
 
@@ -79,12 +79,12 @@ Frontend Code - Implementing code for the new layout and dijkstra algorithm for 
 
 Intregation - Implement backend and frontend integration
 
-Documentation - Working on the document
-
 Tests - Time spent for:
 1) Test the functioning of the dijkstra algorithm on the backend, making the test with more than one example of graphs.
 2) The operation of the new frontend layout in addition to the use of a mock to evaluate the operation of the djkstra algorithm by the frontend.
 3) Testing the backend and frontend integration.
+
+Documentation - Working on the document
 
 # About the project
 
