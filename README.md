@@ -69,13 +69,13 @@ Finalization of the documentation, front-end and bug fixes.
 # Second Implementation
 
 ## Activities Table
-imagem da tabela(atividades.png)
+![atividades](https://github.com/P5-G6/graph-tool/blob/main/images/atividades.png)
 
 Backend Code - Implementing the code for the dijkstra algorithm in the backend
 
 Frontend Layout - Thinking about redesigning the frontend layout and how the new features would be implemented
 
-imagem do layout(layout.png)
+![layout](https://github.com/P5-G6/graph-tool/blob/main/images/Layout.png)
 
 Frontend Code - Implementing code for the new layout and dijkstra algorithm for frontend
 
