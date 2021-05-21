@@ -19,10 +19,9 @@ import { Container } from "./styles";
 // };
 
 function Network({ nodes = [], edges = [], loading = false, onSelect = null }) {
-  console.log("network", nodes, edges);
+  console.log("network", nodes, edges, loading);
   const handlePress = useCallback(
     (event) => {
-      console.log("event", event);
       if (onSelect) onSelect(event);
     },
     [onSelect]

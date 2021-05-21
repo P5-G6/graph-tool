@@ -4,11 +4,21 @@ import styled from "styled-components";
 import Input from "../../../../../components/Input";
 import Button from "../../../../../components/Button";
 
-export default function AddNode({values, onSubmit, onChange }) {
+export default function AddNode({ values, onSubmit, onChange }) {
   return (
     <Container>
-      <Input placeholder='Node' type="text" onChange={(value) => onChange('label', value)} />
-      <Button label="Create" backgroundColor="#000" labelColor="#fff" width={'100%'} onPress={onSubmit}  />
+      <Input
+        placeholder="Node"
+        type="text"
+        onChange={(value) => onChange("vertex_label", value)}
+      />
+      <Button
+        label="Create"
+        backgroundColor="#000"
+        labelColor="#fff"
+        width={"100%"}
+        onPress={onSubmit}
+      />
     </Container>
   );
 }

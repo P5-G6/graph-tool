@@ -1,9 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 
 import Options from "./Options";
 
 import ContextProvider from "./context/provider";
 import InputSection from "./InputSection";
+import ConnectedModalContent from "./connectedModalContent";
+import ConnectedModal from "./connectedModal";
+import ConnectedModalCalculate from "./connectedNodeCalculateShow";
 
 const OPTIONS = [
   { title: "Add Node", value: "add-node" },
@@ -14,6 +17,12 @@ const OPTIONS = [
 export default function Layout({ children }) {
   return (
     <Fragment>
+      <ConnectedModal position='left'>
+        <ConnectedModalCalculate />
+      </ConnectedModal>
+      <ConnectedModal>
+        <ConnectedModalContent />
+      </ConnectedModal>
       <ContextProvider>
         <Options options={OPTIONS} />
         <InputSection />

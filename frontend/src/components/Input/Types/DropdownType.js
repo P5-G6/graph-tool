@@ -117,12 +117,13 @@ const OptionsList = styled.div`
   position: absolute;
   top: 40px;
   width: 120px;
-  height: 200px;
+  min-height: 100px;
+  max-height: 250px;
   background-color: #fff;
 
   border-radius: 10px;
 
-  overflow: hidden;
+  overflow: scroll;
 
   animation-name: ${({ transition }) => transition};
   animation-duration: ${DURATION / 1000}s;

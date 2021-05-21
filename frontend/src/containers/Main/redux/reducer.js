@@ -22,6 +22,12 @@ const { Creators, Types } = createActions(
     addEdgeSuccess: null,
     addEdgeError: null,
 
+    selectNode: ["node"],
+    selectNodeSuccess: ["nodeData"],
+    selectNodeError: null,
+
+    deleteNode: null,
+
     reset: null,
   },
   { prefix: `${PATH}/` }
@@ -41,6 +47,11 @@ const INITIAL_STATE = {
   graphSize: null,
   loadingGraph: false,
 
+  // SECTION NODE:
+  selectedNode: null,
+  nodeData: {},
+  loadingNode: false,
+
   // SECTION MAIN:
   loading: false,
 };
@@ -58,6 +69,7 @@ export const reducer = createReducer(INITIAL_STATE, {
     graphOrder,
     graphSize,
     loading: false,
+    selectedNode: null,
   }),
   [Types.SYNC_ERROR]: (state) => ({ ...state, loading: false }),
 
@@ -87,6 +99,25 @@ export const reducer = createReducer(INITIAL_STATE, {
     loadingGraph: false,
   }),
 
+  [Types.SELECT_NODE]: (state, { node }) => ({
+    ...state,
+    selectedNode: node,
+    loadingNode: true,
+  }),
+  [Types.SELECT_NODE_SUCCESS]: (state, { nodeData }) => ({
+    ...state,
+    loadingNode: false,
+    nodeData,
+  }),
+  [Types.SELECT_NODE_ERROR]: (state) => ({
+    ...state,
+    selectedNode: null,
+    loadingNode: false,
+    nodeData: {},
+  }),
+
+  [Types.DELETE_NODE]: (state) => ({ ...state }),
+
   [Types.RESET]: () => INITIAL_STATE,
 });
 
@@ -98,4 +129,10 @@ export const getGraphData = {
 
 export const getMain = {
   loading: (state) => state[PATH].loading,
+};
+
+export const getNode = {
+  selectedNode: (state) => state[PATH].selectedNode,
+  loading: (state) => state[PATH].loadingNode,
+  data: (state) => state[PATH].nodeData,
 };

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 import { getGraphData } from "../../../redux/reducer";
@@ -7,11 +7,9 @@ import styled from "styled-components";
 import Button from "../../../../../components/Button";
 import Input from "../../../../../components/Input";
 
-const DEFAULT_VALUE = { directioned: false };
-
-export default function AddVertex({ onSubmit, onChange }) {
-  // const [selectedNodes, setSelectedNodes] = useState([]);
+export default function AddVertex({ onSubmit, onChange }) {;
   const nodes = useSelector(getGraphData.nodes);
+
   return (
     <Container>
       <div className="input_row">
@@ -41,7 +39,7 @@ export default function AddVertex({ onSubmit, onChange }) {
         <div className="row_item">
           <Input
             type="switch"
-            onChange={(value) => onChange("directioned", value)}
+            onChange={(value) => onChange("useDirection", value)}
           />
         </div>
         <div className="row_item">

@@ -27,7 +27,12 @@ function InputForms({ type, onSubmit, ...props }) {
   }, [assignForms, formsRef]);
 
   return (
-    <InputItem onSubmit={handleSubmit} onChange={handleChange} {...props} />
+    <InputItem
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      {...props}
+      {...{ formsRef }}
+    />
   );
 }
 

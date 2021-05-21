@@ -4,10 +4,10 @@ import { Container } from './styles';
 
 import CommonCard from '../CommonCard';
 
-function Modal({ visible = false, children }) {
+function Modal({ visible = false, children, position = 'right' }) {
   return (
     visible && (
-      <Container>
+      <Container {...{position}}>
         <CommonCard>{children}</CommonCard>
       </Container>
     )
