@@ -287,7 +287,7 @@ def get_least_cost_all():
                 "headers": {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'},
-                "body": {"least_cost": least_cost["least_cost"]}
+                "body": {"least_cost": least_cost}
                 }
     return response
 
