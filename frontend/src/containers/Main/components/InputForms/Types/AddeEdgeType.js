@@ -1,31 +1,49 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
+
+import { getGraphData } from "../../../redux/reducer";
 
 import styled from "styled-components";
 import Button from "../../../../../components/Button";
 import Input from "../../../../../components/Input";
 
+const DEFAULT_VALUE = { directioned: false };
+
 export default function AddVertex({ onSubmit, onChange }) {
+  // const [selectedNodes, setSelectedNodes] = useState([]);
+  const nodes = useSelector(getGraphData.nodes);
   return (
     <Container>
       <div className="input_row">
         <div className="input_item">
           <Input
             type="dropdown"
-            onChange={(value) => onChange("nodeA", value)}
+            options={nodes}
+            onChange={(value) => onChange("origin", value)}
           />
         </div>
         <div className="input_item">
           <Input
             type="dropdown"
-            onChange={(value) => onChange("nodeB", value)}
+            options={nodes}
+            onChange={(value) => onChange("destiny", value)}
           />
         </div>
       </div>
       <div className="input_row">
-        <Input
-          type="switch"
-          onChange={(value) => onChange("directioned", value)}
-        />
+        <div className="rout_item">
+          <Input
+            type="text"
+            placeholder="Weight"
+            onChange={(value) => onChange("weight", value)}
+          />
+        </div>
+        <div className="row_item">
+          <Input
+            type="switch"
+            onChange={(value) => onChange("directioned", value)}
+          />
+        </div>
         <div className="row_item">
           <Button
             label="Create"

@@ -7,7 +7,7 @@ import InputSection from "./InputSection";
 
 const OPTIONS = [
   { title: "Add Node", value: "add-node" },
-  { title: "Add Vertex", value: "add-vertex" },
+  { title: "Add Edge", value: "add-edge" },
   { title: "Calculate", value: "calculate" },
 ];
 

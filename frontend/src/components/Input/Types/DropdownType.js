@@ -43,7 +43,7 @@ const Transitions = {
   "close-transition": hide,
 };
 
-export default function Dropdown({ onChange }) {
+export default function Dropdown({ onChange, options = [] }) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const { mode } = useTransiion({ visible: open, duration: DURATION });
@@ -61,8 +61,8 @@ export default function Dropdown({ onChange }) {
     [onChange, handleToggle]
   );
 
-  const RenderItem = () => {
-    return <ListItem onPress={handleSelect} title="teste" value={0} />;
+  const RenderItem = ({label = '', id = ''}) => {
+    return <ListItem onPress={handleSelect} title={label} value={id} />;
   };
 
   return (
@@ -73,7 +73,7 @@ export default function Dropdown({ onChange }) {
       </Field>
       {mode !== "hidden" ? (
         <OptionsList transition={Transitions[mode] ?? "none"}>
-          <List data={[1, 2, 3, 4, 5, 6, 7]} renderItem={RenderItem} />
+          <List data={options} renderItem={RenderItem} />
         </OptionsList>
       ) : null}
     </Container>

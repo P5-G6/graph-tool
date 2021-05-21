@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Network from "../../components/Network";
-import { getGraphData } from "./redux/reducer";
+import { getGraphData, getMain } from "./redux/reducer";
 
 const mapStateToProps = (state) => ({
   loading: getGraphData.loading(state),

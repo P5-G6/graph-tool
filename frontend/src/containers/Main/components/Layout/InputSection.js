@@ -1,11 +1,9 @@
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-} from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import context from "./context/context";
+import { useDispatch } from "react-redux";
+
+import Creators from "../../redux/reducer";
+
 import Card from "../../../../components/Card";
 import useTransition from "../../../../components/hooks/transition";
 
@@ -19,15 +17,29 @@ const Transitions = {
   "close-transition": slideOutTop,
 };
 
+const SubmitTypes = {
+  "add-node": Creators.addNode,
+  "add-edge": Creators.addEdge,
+  calculate: () => {},
+};
+
 function InputSection() {
   const {
     state: { selectedOption },
   } = useContext(context);
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(selectedOption !== null);
   const { mode } = useTransition({
     visible,
     duration: 500,
   });
+
+  const handleSubmitForms = useCallback(
+    (values) => {
+      dispatch(SubmitTypes[`${selectedOption}`](values));
+    },
+    [dispatch, selectedOption]
+  );
 
   useEffect(() => {
     setVisible(selectedOption != null);
@@ -36,7 +48,7 @@ function InputSection() {
   return mode !== "hidden" ? (
     <Container {...{ mode }}>
       <Card>
-        <InputForms type={selectedOption} />
+        <InputForms type={selectedOption} onSubmit={handleSubmitForms} />
       </Card>
     </Container>
   ) : null;

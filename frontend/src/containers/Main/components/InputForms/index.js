@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 
 import Types from "./Types";
 
-function InputForms({ type, ...props }) {
+function InputForms({ type, onSubmit, ...props }) {
   const InputItem = Types[type] ?? (() => null);
   const formsRef = useRef({});
 
@@ -18,7 +18,8 @@ function InputForms({ type, ...props }) {
 
   const handleSubmit = useCallback(() => {
     console.log("Formss", formsRef.current);
-  }, [formsRef]);
+    if (onSubmit) onSubmit(formsRef.current);
+  }, [formsRef, onSubmit]);
 
   useEffect(() => {
     assignForms();

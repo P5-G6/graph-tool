@@ -5,16 +5,24 @@ export const PATH = "MainView";
 const { Creators, Types } = createActions(
   {
     sync: null,
-    syncSuccess: null,
+    syncSuccess: [
+      "nodes",
+      "edges",
+      "allDirectioned",
+      "graphOrder",
+      "graphSize",
+    ],
     syncError: null,
 
     addNode: ["node"],
-    addNodeSuccess: ["nodes"],
+    addNodeSuccess: null,
     addNodeError: null,
 
     addEdge: ["edge"],
-    addEdgeSuccess: ["edges"],
+    addEdgeSuccess: null,
     addEdgeError: null,
+
+    reset: null,
   },
   { prefix: `${PATH}/` }
 );
@@ -26,6 +34,7 @@ const INITIAL_STATE = {
   // SECTION GRAPHDATA:
   nodes: [],
   edges: [],
+  allDirectioned: false,
 
   // SECTION DATA:
   graphOrder: null,
@@ -38,17 +47,27 @@ const INITIAL_STATE = {
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SYNC]: (state) => ({ ...state, loading: true }),
-  [Types.SYNC_SUCCESS]: (state) => ({ ...state, loading: false }),
+  [Types.SYNC_SUCCESS]: (
+    state,
+    { nodes, edges, allDirectioned, graphOrder, graphSize }
+  ) => ({
+    ...state,
+    nodes,
+    edges,
+    allDirectioned,
+    graphOrder,
+    graphSize,
+    loading: false,
+  }),
   [Types.SYNC_ERROR]: (state) => ({ ...state, loading: false }),
 
   [Types.ADD_NODE]: (state) => ({
     ...state,
     loadingGraph: true,
   }),
-  [Types.ADD_NODE_SUCCESS]: (state, { nodes }) => ({
+  [Types.ADD_NODE_SUCCESS]: (state) => ({
     ...state,
     loadingGraph: false,
-    nodes,
   }),
   [Types.ADD_NODE_ERROR]: (state) => ({
     ...state,
@@ -59,15 +78,16 @@ export const reducer = createReducer(INITIAL_STATE, {
     ...state,
     loadingGraph: true,
   }),
-  [Types.ADD_EDGE_SUCCESS]: (state, { edges }) => ({
+  [Types.ADD_EDGE_SUCCESS]: (state) => ({
     ...state,
     loadingGraph: false,
-    edges,
   }),
   [Types.ADD_EDGE_ERROR]: (state) => ({
     ...state,
     loadingGraph: false,
   }),
+
+  [Types.RESET]: () => INITIAL_STATE,
 });
 
 export const getGraphData = {

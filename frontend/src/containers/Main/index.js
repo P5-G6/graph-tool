@@ -12,6 +12,9 @@ function MainScreen() {
 
   useEffect(() => {
     dispatch(Creators.sync());
+    return () => {
+      dispatch(Creators.reset());
+    }
   }, [dispatch]);
 
   return (

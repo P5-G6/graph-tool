@@ -1,9 +1,9 @@
-import AddNodeType from './AddNodeType';
-import AddVertex from './AddVertexType';
+import AddNodeType from "./AddNodeType";
+import AddEdge from "./AddeEdgeType";
 
 const Types = {
   "add-node": AddNodeType,
-  "add-vertex": AddVertex,
+  "add-edge": AddEdge,
   calculate: () => null,
 };
 
