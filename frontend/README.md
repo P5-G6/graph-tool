@@ -8,10 +8,9 @@ This section comprises all resources and processes related to the front-end of t
 - ReactDom → Integration of JSX code with DOM;
 - Axios → HTTP requests
 - React Redux → Control and centralization of states based on flux pattern
-- Reduxsauce → Syntactic sugar for the creation of redux structures
 - Redux Saga → Middleware for redux, which uses generators functions to create synchronous or asynchronous subroutines from an Action shot;
 - Styled Components → Used to create stylized components;
-- React Icons → Icon library
+- React Native Vector Icons → Icon library
 
 ---
 
